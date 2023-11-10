@@ -79,21 +79,27 @@ const Login = () => {
     >
       <div>
         <div className="flex items-center gap-[16px] px-[17px] py-[36px]">
-          <svg
-            width="11"
-            height="18"
-            viewBox="0 0 11 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <button
+            onClick={() => {
+              router.back();
+            }}
           >
-            <path
-              d="M10 17L1 9L10 0.999999"
-              stroke="#244A2A"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+            <svg
+              width="11"
+              height="18"
+              viewBox="0 0 11 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 17L1 9L10 0.999999"
+                stroke="#244A2A"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
           <Link href="/signup">
             <LinkText className="">회원가입 하러갈래요!</LinkText>
           </Link>
@@ -111,7 +117,6 @@ const Login = () => {
               pattern: EMAIL_REGEX,
             })}
             placeholder="이메일을 입력해주세요."
-            defaultValue={"planzy@planzy.com"}
             name="email"
             type="text"
             required
@@ -124,7 +129,6 @@ const Login = () => {
             })}
             placeholder="비밀번호를 입력해주세요."
             type="password"
-            defaultValue={"Ww123456!!"}
             name="password"
             required
             autoComplete="true"

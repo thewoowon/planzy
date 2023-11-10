@@ -45,7 +45,14 @@ const CameraPage = () => {
           </Circle>
         </Circle>
       </div>
-      <Image ref={imageRef} src={"/camera-original.png"} alt="" fill />
+      <Image
+        ref={imageRef}
+        src={
+          "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/2287d85e-e923-494b-2b3a-ab1cfc7e8600/public"
+        }
+        alt=""
+        fill
+      />
       <div
         className="z-10 absolute top-[52px] right-[36px]"
         onClick={() => {

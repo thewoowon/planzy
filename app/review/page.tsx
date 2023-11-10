@@ -77,7 +77,6 @@ const ReviewPage = () => {
             required: "이름을 입력해주세요",
           })}
           placeholder="식물 검색하기"
-          defaultValue={"몬스테라 너무 이쁘다 ㅎㅎ"}
           name="name"
           type="text"
           required
@@ -90,7 +89,6 @@ const ReviewPage = () => {
           placeholder="태그 추가하기"
           name="tag"
           type="text"
-          defaultValue={"#너무_이쁘다 #힐링_그잡채"}
           required
           autoComplete="true"
         />

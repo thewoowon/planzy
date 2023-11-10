@@ -35,9 +35,9 @@ const MemberPage = () => {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-[#E9F5EF]">
-      <NavigationHeader title={member.title} href="/map" />
+      <NavigationHeader title={member?.title} href="/map" />
       <div className="flex items-center gap-2 py-[16px]">
-        {member.tag.map((tag, index) => {
+        {member?.tag.map((tag, index) => {
           return <Tag key={index}>{tag}</Tag>;
         })}
       </div>
@@ -47,7 +47,7 @@ const MemberPage = () => {
           router.push(`/member/${id}/info`);
         }}
       >
-        <Image src={member.img[0]} width={237} height={237} alt="profile" />
+        <Image src={member?.img[0]} width={237} height={237} alt="profile" />
         <div className="flex flex-col items-start justify-start pl-2">
           <OptionTitle className="flex items-center gap-2">
             <svg
@@ -66,7 +66,7 @@ const MemberPage = () => {
                 fill="#212121"
               />
             </svg>
-            {member.address}
+            {member?.address}
           </OptionTitle>
           <OptionTitle className="flex items-center gap-2">
             <svg
@@ -82,7 +82,7 @@ const MemberPage = () => {
               />
             </svg>
 
-            {member.time}
+            {member?.time}
           </OptionTitle>
         </div>
       </div>
@@ -94,7 +94,7 @@ const MemberPage = () => {
         modules={[Navigation]}
         className="w-full mt-8 swiper-container"
       >
-        {member.children?.map((target, index) => (
+        {member?.children?.map((target, index) => (
           <SwiperSlide
             className="swiper-slide-custom hover:bg-slate-100 transition ease-in-out duration-200"
             key={index}
