@@ -1,15 +1,8 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import * as React from "react";
-import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { grey } from "@mui/material/colors";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Skeleton from "@mui/material/Skeleton";
-import Typography from "@mui/material/Typography";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import { useRecoilState } from "recoil";
@@ -46,7 +39,12 @@ const PlantDetailPage = () => {
           >
             Planzy
           </Logo>
-          <div className="p-3 bg-white rounded-full shadow-sm shadow-emerald-500 hover:bg-gray-100 transition duration-200 ease-in-out">
+          <div
+            className="p-3 bg-white rounded-full shadow-sm shadow-emerald-500 hover:bg-gray-100 transition duration-200 ease-in-out"
+            onClick={() => {
+              router.push(`/chat/${id}`);
+            }}
+          >
             <svg
               width="24"
               height="24"

@@ -10,7 +10,14 @@ import Layout from "@/components/Layout";
 import { Toaster } from "react-hot-toast";
 import { NavermapsProvider as NaverMapsProvider } from "react-naver-maps";
 
-const removeLayout = ["/login", "/camera", "/map", "/member", "/review"];
+const removeLayout = [
+  "/login",
+  "/camera",
+  "/map",
+  "/member",
+  "/review",
+  "/chat",
+];
 
 export default function RootLayout({
   children,
@@ -46,6 +53,7 @@ export default function RootLayout({
               <GlobalStyles />
               {!removeLayout.includes(pathname) ? (
                 pathname.startsWith("/member") ||
+                pathname.startsWith("/chat") ||
                 pathname.startsWith("/review") ? (
                   <div>{children}</div>
                 ) : (
