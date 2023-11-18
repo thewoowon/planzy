@@ -32,6 +32,25 @@ const PlantDetailPage = () => {
     <div className="pt-[32px] bg-[#E9F5EF] h-screen">
       <div className="w-full flex flex-col justify-center items-center">
         <div className="flex w-full justify-between px-[32px] items-center">
+          <div
+            onClick={() => {
+              router.back();
+            }}
+            className="cursor-pointer w-[48px] h-[48px] flex justify-start items-center"
+          >
+            <svg
+              width="13"
+              height="24"
+              viewBox="0 0 13 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.7514 23.982L0.878359 14.109C0.315946 13.5464 0 12.7835 0 11.988C0 11.1925 0.315946 10.4296 0.878359 9.867L10.7454 0L12.1594 1.414L2.29236 11.281C2.10489 11.4685 1.99957 11.7228 1.99957 11.988C1.99957 12.2532 2.10489 12.5075 2.29236 12.695L12.1654 22.568L10.7514 23.982Z"
+                fill="#374957"
+              />
+            </svg>
+          </div>
           <Logo
             onClick={() => {
               router.push("/");
@@ -42,7 +61,7 @@ const PlantDetailPage = () => {
           <div
             className="p-3 bg-white rounded-full shadow-sm shadow-emerald-500 hover:bg-gray-100 transition duration-200 ease-in-out"
             onClick={() => {
-              router.push(`/chat/${id}`);
+              router.push(`/chat/${id}/${plantId}`);
             }}
           >
             <svg
@@ -69,10 +88,11 @@ const PlantDetailPage = () => {
         <div className="py-[16px]">
           <Image
             src={
+              plant.img ||
               "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/f803fd8c-8c35-40e9-1013-da0adea16400/public"
             }
             alt="plant"
-            width={392}
+            width={250}
             height={268}
           />
         </div>
@@ -93,7 +113,7 @@ const PlantDetailPage = () => {
         <OpacityPanel className="flex flex-col gap-2 py-[16px] px-[16px] mx-[16px] overflow-scroll rounded-xl">
           <div className="flex items-baseline gap-2 py-4">
             <Title>{plant.title}</Title>
-            <SubTitle>{"#온화 #우아 #언제나_차분 #인내"}</SubTitle>
+            <SubTitle>#{plant.tag.join(", #")}</SubTitle>
           </div>
           <Effect>식물원에서 많이 볼 수 있는 열대식물</Effect>
           <Content>{`곰다시 컴퓨터 도서 별하 여우별 소록소록 미쁘다 노트북 안녕 바나나 여우별 미리내 별하 달볓 도르레 이플 아련 가온해 이플 도르레 감또개 아리아 그루잠 예그리나 안녕 사과 다솜 가온해 노트북 나비잠 가온누리 여우별 감사합니다 늘품 도담도담 비나리 책방 산들림 소솜 아슬라 아슬라 아리아 산들림 산들림 우리는 산들림 도서관 함초롱하다 별하 안녕.

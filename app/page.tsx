@@ -10,25 +10,80 @@ import { useRecoilState } from "recoil";
 import { collectionState, loginState } from "@/states";
 import { useEffect } from "react";
 import { dummyLatLng } from "@/constants/constants";
+import { useRouter } from "next/navigation";
 
-const imageList = [
+const friends = [
   {
-    title: "CAFE 나무",
-    subtitle: 300,
-    image:
-      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/be42decb-ba56-47ef-86ad-938176640500/public",
+    id: 1,
+    name: "올리브 나무",
+    intro:
+      "평온한 아로마를 풍기는 올리브 나무, 자연의 우아함을 담아낸 실내 식물.",
+    imageUrl:
+      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/85c6177d-6e2b-4c06-1827-666548000c00/public",
+    lastChatTime: "13:13",
   },
   {
-    title: "베르베르 회원",
-    subtitle: 200,
-    image:
-      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/d68a8942-0647-4bf0-161d-b33e7e2dac00/public",
+    id: 2,
+    name: "산세베리아",
+    intro:
+      "능고하고 강인한 미모, 산세베리아는 집 안을 화려하게 비춰주는 선명한 녹색 친구.",
+    imageUrl:
+      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/ab34cd60-5a64-4ee6-d061-494f2cf5af00/public",
+    lastChatTime: "13:46",
   },
   {
-    title: "와이낫 회원",
-    subtitle: 1000,
-    image:
-      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/d68a8942-0647-4bf0-161d-b33e7e2dac00/public",
+    id: 3,
+    name: "로즈마리",
+    intro:
+      "신선한 허브 향기의 로즈마리, 주방을 활력 넘치게 만들어주는 허브의 매력.",
+    imageUrl:
+      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/b041b810-1795-430e-f818-b4ac4e1d3e00/public",
+    lastChatTime: "15:22",
+  },
+  {
+    id: 4,
+    name: "멜라니",
+    intro:
+      "우아한 이름의 멜라니, 독특한 모습으로 공간을 특별하게 꾸며주는 특별한 식물.",
+    imageUrl:
+      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/3d5c5ebf-9373-476d-8e84-4e9b04d8d900/public",
+    lastChatTime: "3시간 전",
+  },
+  {
+    id: 5,
+    name: "스투키",
+    intro:
+      "독특한 이름의 스투키, 실내 공간을 화려하게 수놓아주는 예쁜 초록 친구.",
+    imageUrl:
+      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/ccc309e8-f01a-48d4-a56a-c95d712df100/public",
+    lastChatTime: "4시간 전",
+  },
+  {
+    id: 6,
+    name: "여인초",
+    intro:
+      "우아하고 섬세한 여인초, 고요한 분위기를 조성해주는 실내 정원의 주역.",
+    imageUrl:
+      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/e116c07f-37b4-4913-3ee3-3510331d6700/public",
+    lastChatTime: "6시간 전",
+  },
+  {
+    id: 7,
+    name: "몬스테라",
+    intro:
+      "대표적 실내 식물 몬스테라, 그린 리프로 공간을 화사하게 만들어주는 자연의 예술품.",
+    imageUrl:
+      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/7988b564-1da5-478f-54f1-d454b5b89e00/public",
+    lastChatTime: "2일 전",
+  },
+  {
+    id: 8,
+    name: "데이지",
+    intro:
+      "상큼한 데이지, 밝은 분위기를 전하는 꽃의 아름다움이 피어나는 공간의 포인트.",
+    imageUrl:
+      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/b6534e5e-0928-40dc-127d-317eb03b2600/public",
+    lastChatTime: "3일 전",
   },
 ];
 
@@ -37,7 +92,8 @@ const Home = () => {
   const [collectionList, setCollectionState] = useRecoilState(collectionState);
   useEffect(() => {
     localStorage.getItem("token") ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  });
+  }, [setIsLoggedIn]);
+  const router = useRouter();
 
   useEffect(() => {
     setCollectionState([...dummyLatLng]);
@@ -60,10 +116,16 @@ const Home = () => {
         modules={[Navigation]}
         className="w-full mt-8 swiper-container"
       >
-        {imageList.map((imageObj, index) => (
-          <SwiperSlide className="swiper-slide-custom" key={index}>
+        {dummyLatLng.map((imageObj, index) => (
+          <SwiperSlide
+            className="swiper-slide-custom hover:bg-slate-100 transition duration-200 ease-in-out "
+            key={index}
+            onClick={() => {
+              router.push(`/member/${imageObj.id}`);
+            }}
+          >
             <div className="overflow-hidden w-[130px] h-[80px] rounded-lg">
-              <Image src={imageObj.image} alt="" width={132} height={132} />
+              <Image src={imageObj.img[0]} alt="" width={132} height={132} />
             </div>
             <SwiperTitle>{imageObj.title}</SwiperTitle>
             <div className="flex gap-1 items-center mt-[4px]">
@@ -85,7 +147,7 @@ const Home = () => {
                   fillOpacity="0.5"
                 />
               </svg>
-              <SwiperSubtitle>{imageObj.subtitle}M</SwiperSubtitle>
+              <SwiperSubtitle>{300}M</SwiperSubtitle>
             </div>
           </SwiperSlide>
         ))}
@@ -94,41 +156,37 @@ const Home = () => {
         <LinkTitle
           title="나의 식물 대화창"
           hrefLabel={"내 식물이랑 대화하러 가기"}
-          href={"/map"}
+          href={"/chat"}
           padding="32px 0"
         />
       </div>
       <div className="flex flex-col w-full px-[32px] gap-[8px]">
-        {new Array(10).fill(0).map((_, index) => {
+        {friends.map((friend, index) => {
           return (
             <ListBox
               key={index}
               className="flex px-[16px] items-center justify-between w-full border-b py-3 hover:bg-slate-100 transition ease-in-out duration-200"
             >
               <div className="flex items-center">
-                <ImageBox className="relative w-16 h-16 bg-gray-200 rounded-full">
-                  <Image
-                    src={
-                      "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/618ad520-8653-45d2-64d1-9a6876faa500/public"
-                    }
-                    alt=""
-                    fill
-                  />
+                <div className="relative w-[50px] h-[50px]">
+                  <ImageBox className="relative w-[50px] h-[50px] rounded-full">
+                    <Image src={friend.imageUrl} alt="" fill />
+                  </ImageBox>
                   {index % 4 === 0 && (
-                    <div className="absolute right-0 text-white rounded-full flex justify-center items-center text-[12px] w-[20px] h-[20px] bg-[#06BA0D]">
+                    <div className="absolute right-0 top-0 text-white rounded-full flex justify-center items-center text-[12px] w-[20px] h-[20px] bg-[#06BA0D]">
                       2
                     </div>
                   )}
-                </ImageBox>
-                <div className="ml-4">
-                  <div className="text-[15px] font-bold ">몬스테라</div>
-                  <div className="text-sm font-light">
-                    제일가는 포테이토칩 안녕
-                  </div>
+                </div>
+                <div className="ml-4 flex-1">
+                  <div className="text-[14px] font-bold ">{friend.name}</div>
+                  <div className="text-xs font-light">{friend.intro}</div>
                 </div>
               </div>
-              <div className="flex items-center">
-                <div className="text-sm font-bold text-[#18A402]">어제</div>
+              <div className="flex items-center w-16 justify-end">
+                <div className="text-xs font-bold text-[#18A402]">
+                  {friend.lastChatTime}
+                </div>
               </div>
             </ListBox>
           );
@@ -146,6 +204,8 @@ const Container = styled.div`
   align-items: flex-start;
   justify-content: center;
   padding: 32px 0;
+  background: #e9f5ef;
+  padding-bottom: 120px;
 `;
 
 const Title = styled.div`
@@ -179,10 +239,7 @@ const SwiperSubtitle = styled.div`
 const ListBox = styled.div`
   border-radius: 16px;
   border: 1px solid #fff;
-
-  opacity: 0.65;
-  background: #fff;
-
+  background-color: #fff;
   box-shadow: 0px 4px 16px 0px rgba(1, 74, 0, 0.2);
 `;
 
@@ -191,4 +248,13 @@ const ImageBox = styled.div`
   background: url(<path-to-image>), lightgray 50% / cover no-repeat;
   box-shadow: 0px 0px 8px 0px rgba(24, 164, 2, 0.16);
   overflow: hidden;
+`;
+
+const Intro = styled.div`
+  color: rgba(158, 158, 158, 0.7);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px; /* 100% */
 `;

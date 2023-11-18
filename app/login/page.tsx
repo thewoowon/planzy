@@ -73,49 +73,57 @@ const Login = () => {
   };
 
   return (
-    <form
+    <Form
       onSubmit={handleSubmit(onSubmit)}
       className="px-[17px] py-[42px] bg-[#E9F5EF] h-screen justify-between flex flex-col"
     >
       <div>
         <div className="flex items-center gap-[16px] px-[17px] py-[36px]">
-          <svg
-            width="11"
-            height="18"
-            viewBox="0 0 11 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <button
+            onClick={() => {
+              router.back();
+            }}
           >
-            <path
-              d="M10 17L1 9L10 0.999999"
-              stroke="#244A2A"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+            <svg
+              width="11"
+              height="18"
+              viewBox="0 0 11 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 17L1 9L10 0.999999"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
           <Link href="/signup">
             <LinkText className="">회원가입 하러갈래요!</LinkText>
           </Link>
         </div>
-        <div className="px-[17px]">
-          <Title fontSize="16px" color="#18A402">
-            만나서 반가워요!
-          </Title>
-          <Title fontSize="24px">로그인을 해주세요</Title>
+        <div>
+          <Logo
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            Planzy
+          </Logo>
         </div>
-        <div className="pt-6">
+        <div className="mt-[48px]">
           <CustomInput
             {...register("email", {
               required: "이메일을 입력하세요",
               pattern: EMAIL_REGEX,
             })}
             placeholder="이메일을 입력해주세요."
-            defaultValue={"planzy@planzy.com"}
             name="email"
             type="text"
             required
-            autoComplete="true"
+            autoComplete="off"
           />
           <CustomInput
             {...register("password", {
@@ -124,29 +132,28 @@ const Login = () => {
             })}
             placeholder="비밀번호를 입력해주세요."
             type="password"
-            defaultValue={"Ww123456!!"}
             name="password"
             required
-            autoComplete="true"
+            autoComplete="off"
           />
         </div>
 
-        <div className="mt-[37px] flex justify-between px-[12px]">
-          <Title fontSize="12px" color="#747980">
+        <div className="flex justify-between px-[12px]">
+          <Title fontSize="12px" color="#fff">
             인증번호가 오지 않나요?
           </Title>
           <Title
             fontSize="12px"
-            color="#18A402"
+            color="#fff"
             style={{
               textDecoration: "underline",
             }}
           >
-            비밀번호를 잊어버렸어요
+            비밀번호를 까먹었어요!
           </Title>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center w-full gap-2">
+      <div className="flex flex-col items-center justify-center w-full gap-2 mb-6">
         <Button
           type="button"
           className="py-4"
@@ -164,20 +171,21 @@ const Login = () => {
           type="submit"
           className="py-4"
           style={{
-            backgroundColor: "#18A402",
+            backgroundColor: "rgba(255, 255, 255, 0.85)",
+            color: "#000000",
           }}
         >
           로그인
         </Button>
       </div>
-    </form>
+    </Form>
   );
 };
 
 export default Login;
 
 const LinkText = styled.div`
-  color: var(--text-placeholder, #747980);
+  color: white;
   font-family: SUIT;
   font-size: 12px;
   font-style: normal;
@@ -201,14 +209,12 @@ const Title = styled.div<{
 const CustomInput = styled.input`
   border-radius: 16px;
   border: 1px solid #fff;
-  opacity: 0.6;
-  background: rgba(255, 255, 255, 0.6);
-  box-shadow: 0px 4px 16px 0px rgba(1, 74, 0, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 0px 4px 0px rgba(1, 74, 0, 0.25);
   padding: 16px 16px;
   margin-bottom: 16px;
   width: 100%;
   height: 48px;
-  color: #212121;
   font-family: Pretendard Variable;
   font-size: 16px;
   font-style: normal;
@@ -216,6 +222,11 @@ const CustomInput = styled.input`
   line-height: 24px;
   letter-spacing: -0.02em;
   text-align: left;
+  &::placeholder {
+    color: #f1f1f1;
+  }
+  color: white;
+  outline: none;
 `;
 
 const Button = styled.button<{
@@ -232,4 +243,26 @@ const Button = styled.button<{
   letter-spacing: -0.02em;
   box-shadow: 0px 0px 16px 0px rgba(93, 85, 11, 0.25);
   width: 100%;
+`;
+
+const Form = styled.form`
+  background-image: url("/login-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 17px;
+`;
+
+const Logo = styled.div`
+  color: white;
+  text-align: center;
+  font-family: Poppins, sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 100% */
 `;
