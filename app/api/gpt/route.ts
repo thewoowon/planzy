@@ -1,7 +1,7 @@
 export async function POST(req: Request) {
   const { message } = await req.json();
 
-  const response = await fetch("https://c277-211-198-125-45.ngrok.io/gen", {
+  const response = await fetch("https://ffc5-211-198-125-45.ngrok.io/gen", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
