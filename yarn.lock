@@ -381,6 +381,10 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
+"@nanostores/react@ai/react":
+  version "0.7.1"
+  resolved "https://codeload.github.com/ai/react/tar.gz/b71b8427c9ec9c780083544505495ce7b36b7059"
+
 "@next/env@14.0.1":
   version "14.0.1"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-14.0.1.tgz#7d03c9042c205a320aef2ea3f83c2d16b6825563"

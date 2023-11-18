@@ -1,104 +1,108 @@
 "use client";
 import styled from "@emotion/styled";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+// import { useState } from "react";
+// import { useForm } from "react-hook-form";
 import Send from "./svg/Send";
 import { CircularProgress } from "@mui/material";
+import { useChat } from "ai/react";
 
 type Inputs = {
   question: string;
 };
 
 const GPT = () => {
-  const [messages, setMessages] = useState<
-    {
-      id: number;
-      role: string;
-      content: string;
-      time?: string;
-    }[]
-  >([]);
+  const { messages, input, handleInputChange, handleSubmit, data, isLoading } =
+    useChat();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<Inputs>();
+  // const [messages, setMessages] = useState<
+  //   {
+  //     id: number;
+  //     role: string;
+  //     content: string;
+  //     time?: string;
+  //   }[]
+  // >([]);
 
-  const [loading, setLoading] = useState(false);
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  //   setValue,
+  // } = useForm<Inputs>();
 
-  const onSubmit = async (data: Inputs) => {
-    const { question } = data;
-    if (!question) {
-      return;
-    }
+  // const [loading, setLoading] = useState(false);
 
-    setValue("question", "");
+  // const onSubmit = async (data: Inputs) => {
+  //   const { question } = data;
+  //   if (!question) {
+  //     return;
+  //   }
 
-    setLoading(true);
+  //   setValue("question", "");
 
-    const date = new Date();
+  //   setLoading(true);
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: prev.length,
-        role: "user",
-        content: question,
-        time: `${date.getHours().toString().padStart(2, "0")}:${date
-          .getMinutes()
-          .toString()
-          .padStart(2, "0")}`,
-      },
-    ]);
+  //   const date = new Date();
 
-    // 대화기록을 모두 종합한다.
-    // role에 상관없이.
+  //   setMessages((prev) => [
+  //     ...prev,
+  //     {
+  //       id: prev.length,
+  //       role: "user",
+  //       content: question,
+  //       time: `${date.getHours().toString().padStart(2, "0")}:${date
+  //         .getMinutes()
+  //         .toString()
+  //         .padStart(2, "0")}`,
+  //     },
+  //   ]);
 
-    // const deepCopy = [...messages];
+  //   // 대화기록을 모두 종합한다.
+  //   // role에 상관없이.
 
-    // console.log(deepCopy);
+  //   // const deepCopy = [...messages];
 
-    // deepCopy.push({
-    //   id: deepCopy.length,
-    //   role: "user",
-    //   content: question,
-    //   time: `${date.getHours()}:${date.getMinutes()}`,
-    // });
+  //   // console.log(deepCopy);
 
-    // const message = deepCopy.map((m) => {
-    //   return { message: m.content };
-    // });
+  //   // deepCopy.push({
+  //   //   id: deepCopy.length,
+  //   //   role: "user",
+  //   //   content: question,
+  //   //   time: `${date.getHours()}:${date.getMinutes()}`,
+  //   // });
 
-    // console.log(message);
+  //   // const message = deepCopy.map((m) => {
+  //   //   return { message: m.content };
+  //   // });
 
-    await fetch("/api/gpt", {
-      method: "POST",
-      body: JSON.stringify({
-        message: question,
-      }),
-    }).then(async (res) => {
-      const { text } = await res.json();
+  //   // console.log(message);
 
-      const date = new Date();
+  // await fetch("/api/gpt", {
+  //   method: "POST",
+  //   body: JSON.stringify({
+  //     message: question,
+  //   }),
+  // }).then(async (res) => {
+  //   const { text } = await res.json();
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: prev.length,
-          role: "gpt",
-          content: text,
-          time: `${date.getHours().toString().padStart(2, "0")}:${date
-            .getMinutes()
-            .toString()
-            .padStart(2, "0")}`,
-        },
-      ]);
+  //   const date = new Date();
 
-      setLoading(false);
-    });
-  };
+  //   setMessages((prev) => [
+  //     ...prev,
+  //     {
+  //       id: prev.length,
+  //       role: "gpt",
+  //       content: text,
+  //       time: `${date.getHours().toString().padStart(2, "0")}:${date
+  //         .getMinutes()
+  //         .toString()
+  //         .padStart(2, "0")}`,
+  //     },
+  //   ]);
+
+  //   setLoading(false);
+  // });
+  // };
 
   return (
     <GPTContainer>
@@ -109,14 +113,26 @@ const GPT = () => {
                 <div key={m.id} className="w-full flex justify-end">
                   <UserChatBox className="flex items-baseline gap-2">
                     <div>{m.content}</div>
-                    <div className="text-[12px] font-light">{m.time}</div>
+                    <div className="text-[12px] font-light">{`${new Date()
+                      .getHours()
+                      .toString()
+                      .padStart(2, "0")}:${new Date()
+                      .getMinutes()
+                      .toString()
+                      .padStart(2, "0")}`}</div>
                   </UserChatBox>
                 </div>
               ) : (
                 <div key={m.id}>
                   <GPTChatBox className="flex items-baseline gap-2">
                     <div>{m.content}</div>
-                    <div className="text-[12px] font-light">{m.time}</div>
+                    <div className="text-[12px] font-light">{`${new Date()
+                      .getHours()
+                      .toString()
+                      .padStart(2, "0")}:${new Date()
+                      .getMinutes()
+                      .toString()
+                      .padStart(2, "0")}`}</div>
                   </GPTChatBox>
                 </div>
               )
@@ -124,21 +140,23 @@ const GPT = () => {
           : null}
       </GPTAnswer>
       <GPTForm
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         style={{
           display: "flex",
           justifyContent: "space-between",
         }}
       >
         <input
-          {...register("question", { required: true })}
           type="text"
           name="question"
           placeholder="질문을 입력하세요."
           required
+          value={input}
+          onChange={handleInputChange}
+          autoComplete="off"
         />
-        <button type="submit" disabled={loading}>
-          {loading ? (
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? (
             <CircularProgress
               size={20}
               color="info"

@@ -45,14 +45,17 @@ const CameraPage = () => {
           </Circle>
         </Circle>
       </div>
-      <Image
-        ref={imageRef}
-        src={
-          "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/2287d85e-e923-494b-2b3a-ab1cfc7e8600/public"
-        }
-        alt=""
-        fill
-      />
+      <ImageBox>
+        <Image
+          ref={imageRef}
+          src={
+            "https://imagedelivery.net/6qzLODAqs2g1LZbVYqtuQw/04403ab9-a33b-4e1e-fa12-886d4b319f00/public"
+          }
+          alt=""
+          fill
+        />
+      </ImageBox>
+      <GradientBox />
       <div
         className="z-10 absolute top-[52px] right-[36px]"
         onClick={() => {
@@ -81,4 +84,28 @@ const Circle = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const ImageBox = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f2f2f2;
+`;
+
+const GradientBox = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  z-index: 10;
+  background: linear-gradient(
+    180deg,
+    #020000 0%,
+    rgba(1, 0, 0, 0.54) 28.32%,
+    rgba(200, 200, 200, 0) 61.57%
+  );
 `;

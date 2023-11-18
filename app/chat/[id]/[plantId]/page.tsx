@@ -3,13 +3,23 @@ import GPT from "@/components/GPT";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import styled from "@emotion/styled";
+import { useRecoilState } from "recoil";
+import { collectionState } from "@/states";
 
 const ChatPage = () => {
-  const { id } = useParams<{ id: string }>();
-
-  const parsedId = parseInt(id);
+  const { id, plantId } = useParams<{
+    id: string;
+    plantId: string;
+  }>();
 
   const router = useRouter();
+
+  const parsedId = parseInt(id);
+  const parsedPlantId = parseInt(plantId);
+
+  const [collectionList] = useRecoilState(collectionState);
+
+  const plant = collectionList[parsedId].children[parsedPlantId];
 
   return (
     <div className="bg-[#E9F5EF] h-screen">
@@ -40,7 +50,7 @@ const ChatPage = () => {
             height={50}
           />
           <div>
-            <Title>{"스투키"}</Title>
+            <Title>{plant.title}</Title>
             <div className="flex gap-1 items-center mt-[4px]">
               <svg
                 width="8"

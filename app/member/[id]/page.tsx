@@ -38,7 +38,7 @@ const MemberPage = () => {
       <NavigationHeader title={member?.title} href="/map" />
       <div className="flex items-center gap-2 py-[16px]">
         {member?.tag.map((tag, index) => {
-          return <Tag key={index}>{tag}</Tag>;
+          return <Tag key={index}>#{tag}</Tag>;
         })}
       </div>
       <div
@@ -47,8 +47,10 @@ const MemberPage = () => {
           router.push(`/member/${id}/info`);
         }}
       >
-        <Image src={member?.img[0]} width={237} height={237} alt="profile" />
-        <div className="flex flex-col items-start justify-start pl-2">
+        <div className="w-[237px] h-[237px] justify-center items-center flex relative rounded-xl overflow-hidden">
+          <Image src={member?.img[0]} fill alt="profile" />
+        </div>
+        <div className="flex flex-col items-start justify-start pl-2 pt-[13px]">
           <OptionTitle className="flex items-center gap-2">
             <svg
               width="11"
@@ -102,11 +104,11 @@ const MemberPage = () => {
             <div
               className="flex flex-col items-center"
               onClick={() => {
-                router.push(pathName + "/" + target.id);
+                router.push(pathName + "/" + (target.id - 1));
               }}
             >
               <div className="overflow-hidden w-[106px] h-[106px] rounded-lg">
-                <Image src={target.img} alt="" width={106} height={106} />
+                <Image src={target.img} alt="" width={100} height={100} />
               </div>
               <div className="flex items-center gap-1">
                 <SwiperTitle>{target.title}</SwiperTitle>
@@ -138,7 +140,7 @@ const MemberPage = () => {
       </Swiper>
       <div className="mt-[32px] flex gap-4 items-center">
         <button
-          className="w-[60px] h-[60px] bg-green-500 flex justify-center rounded-full items-center shadow-lg"
+          className="w-[60px] h-[60px] bg-[#2BA649] flex justify-center rounded-full items-center shadow-lg"
           onClick={() => {
             setSelectedState(parsedId);
             return router.push(`/camera`);
